@@ -124,6 +124,7 @@ export const habits = pgTable("habits", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   archived: boolean("archived").notNull().default(false),
 });
+export type Habit = typeof habits.$inferSelect;
 
 // ---------- completions ----------
 // One row per habit per day it was completed. `completedOn` + `habitId`
