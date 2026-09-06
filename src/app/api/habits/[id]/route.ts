@@ -30,7 +30,6 @@ export async function PATCH(
   if (!existing) {
     return NextResponse.json({ error: "Habit not found" }, { status: 404 });
   }
-  // ...use `id` instead of `params.id` for the rest of the function
 
   const body = await req.json().catch(() => null);
   const parsed = updateHabitSchema.safeParse(body);

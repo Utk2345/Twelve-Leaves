@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TimezoneSync } from "@/components/TimezoneSync";
 
 export const metadata: Metadata = {
   title: "Habit Garden",
@@ -9,7 +10,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <TimezoneSync />
+        {children}
+        </body>
     </html>
   );
 }
