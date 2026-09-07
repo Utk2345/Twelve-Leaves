@@ -1,3 +1,5 @@
+import { CARD, INK, INK_MUTED } from "@/lib/ui-classes";
+
 export function StatCard({
   label,
   value,
@@ -8,11 +10,9 @@ export function StatCard({
   sublabel?: string;
 }) {
   return (
-    <div className="flex flex-col gap-1 border-l-[3px] border-[#7C9473] px-4 py-3">
-      <span className="font-(family-name:--font-fraunces) text-2xl sm:text-3xl text-[#24261F]">
-        {value}
-      </span>
-      <span className="font-(family-name:--font-public-sans) text-xs text-[#5B5744]">
+    <div className={`${CARD} flex flex-col items-center text-center gap-1 px-4 py-5`}>
+      <span className={`font-(family-name:--font-fraunces) text-2xl sm:text-3xl ${INK}`}>{value}</span>
+      <span className={`text-xs font-medium ${INK_MUTED}`}>
         {label}
         {sublabel ? ` (${sublabel})` : ""}
       </span>

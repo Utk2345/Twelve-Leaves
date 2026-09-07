@@ -1,0 +1,27 @@
+// Shared visual language for the "dreamy garden" theme, introduced on the
+// dashboard and reused here so habits/garden/stats read as the same app.
+// Plain strings (not a CSS-in-JS system) to match the rest of the codebase's
+// arbitrary-Tailwind-value convention.
+
+export const PAGE_BG = "bg-[#F5F0E2] dark:bg-[#131C10]";
+
+export const CARD =
+  "rounded-[22px] bg-[#FFFEFB] dark:bg-[#1C2717] " +
+  "shadow-[0_14px_32px_-16px_rgba(40,36,20,0.22),0_2px_8px_rgba(40,36,20,0.06)] " +
+  "dark:shadow-[0_14px_32px_-16px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.3)]";
+
+export const INK = "text-[#21251A] dark:text-[#ECE8D8]";
+export const INK_MUTED = "text-[#5C6150] dark:text-[#AFAB92]";
+export const INK_FAINT = "text-[#8B8A72] dark:text-[#757058]";
+
+export const LINK = "text-[#33502F] dark:text-[#82B27C]";
+export const DANGER = "text-[#A3492E] dark:text-[#E0715A]";
+export const GOLD = "text-[#B9862E] dark:text-[#E6BD6C]";
+
+export const BTN_PRIMARY =
+  "bg-[#33502F] dark:bg-[#82B27C] text-[#F5F0E2] dark:text-[#0D140A] hover:-translate-y-px transition-transform";
+
+export const DIVIDER = "border-[#EEE8D6] dark:border-[#24311C]";
+
+export const TRACK = "bg-[#DCE8CB] dark:bg-[#2B3A22]";
+export const TRACK_FILL = "bg-[#86A971] dark:bg-[#9AC286]";
