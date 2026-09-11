@@ -5,7 +5,7 @@ import { getTheme } from "@/lib/theme";
 import { fraunces, publicSans } from "@/app/fonts";
 
 export const metadata: Metadata = {
-  title: "Habit Garden",
+  title: "Twelve Leaves",
   description: "Grow a garden by building habits.",
 };
 

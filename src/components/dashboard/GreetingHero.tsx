@@ -1,6 +1,3 @@
-import { PlantStage } from "@/components/garden/PlantStage";
-import type { PlantStage as Stage } from "@/lib/growth";
-
 function greetingWord(hour: number): string {
   if (hour < 12) return "Good morning";
   if (hour < 18) return "Good afternoon";
@@ -12,13 +9,11 @@ export function GreetingHero({
   today,
   completedToday,
   totalActive,
-  stage,
 }: {
   name: string;
   today: string; // YYYY-MM-DD, visitor's local date
   completedToday: number;
   totalActive: number;
-  stage: Stage;
 }) {
   const [y, m, d] = today.split("-").map(Number);
   const dateObj = new Date(Date.UTC(y, m - 1, d));
@@ -53,7 +48,23 @@ export function GreetingHero({
       </div>
 
       <div className="relative shrink-0">
-        <PlantStage stage={stage} className="w-16 h-[4.5rem]" />
+        <svg className="grow-in" width="64" height="72" viewBox="0 0 200 220" aria-hidden="true">
+          <path
+            d="M100 190 C100 150 100 140 100 120"
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+            className="stroke-[#33502F] dark:stroke-[#82B27C]"
+          />
+          <path
+            d="M100 140 C80 132 70 118 74 104 C90 108 100 122 100 140 Z"
+            className="fill-[#86A971] dark:fill-[#9AC286]"
+          />
+          <path
+            d="M100 150 C120 142 130 128 126 114 C110 118 100 132 100 150 Z"
+            className="fill-[#86A971] dark:fill-[#9AC286]"
+          />
+        </svg>
         <div
           className="absolute -left-2 -bottom-2 w-8 h-8 rounded-full flex items-center justify-center
                      bg-[#33502F] dark:bg-[#82B27C] text-[#F5F0E2] dark:text-[#0D140A]

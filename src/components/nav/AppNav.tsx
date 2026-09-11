@@ -39,7 +39,7 @@ export function AppNav({
             <path d="M12 21V9" />
           </svg>
           <span className="font-[family-name:var(--font-fraunces)] italic text-[15px] text-[#21251A] dark:text-[#ECE8D8]">
-            Habit Garden
+            Twelve Leaves
           </span>
         </a>
 

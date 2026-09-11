@@ -1,7 +1,6 @@
-import type { PlantStage as Stage } from "@/lib/growth";
-import { PlantStage } from "@/components/garden/PlantStage";
+import type { PlantStage } from "@/lib/growth";
 
-const STAGES: Stage[] = ["seed", "sprout", "bloom"];
+const STAGES: PlantStage[] = ["seed", "sprout", "bloom"];
 
 export function GardenSnapshot({
   growthPoints,
@@ -9,7 +8,7 @@ export function GardenSnapshot({
   pointsToNext,
 }: {
   growthPoints: number;
-  stage: Stage;
+  stage: PlantStage;
   pointsToNext: number | null;
 }) {
   const stageIndex = STAGES.indexOf(stage);
@@ -35,7 +34,29 @@ export function GardenSnapshot({
             "radial-gradient(90% 140% at 15% 120%, color-mix(in srgb, #D9A544 30%, transparent), transparent 65%), radial-gradient(90% 140% at 85% -20%, color-mix(in srgb, #86A971 40%, transparent), transparent 60%)",
         }}
       >
-        <PlantStage stage={stage} className="w-16 h-[4.5rem] shrink-0" />
+        <svg className="grow-in shrink-0" width="64" height="72" viewBox="0 0 200 220" aria-hidden="true">
+          <ellipse cx="100" cy="196" rx="70" ry="14" className="fill-[#33502F] dark:fill-[#82B27C]" opacity="0.2" />
+          <path
+            d="M100 190 C100 150 100 140 100 120"
+            strokeWidth="4"
+            fill="none"
+            strokeLinecap="round"
+            className="stroke-[#33502F] dark:stroke-[#82B27C]"
+          />
+          {stageIndex >= 1 && (
+            <>
+              <path
+                d="M100 140 C80 132 70 118 74 104 C90 108 100 122 100 140 Z"
+                className="fill-[#86A971] dark:fill-[#9AC286]"
+              />
+              <path
+                d="M100 150 C120 142 130 128 126 114 C110 118 100 132 100 150 Z"
+                className="fill-[#86A971] dark:fill-[#9AC286]"
+              />
+            </>
+          )}
+          {stageIndex >= 2 && <circle cx="100" cy="108" r="14" className="fill-[#D9A544] dark:fill-[#E6BD6C]" />}
+        </svg>
 
         <div>
           <p className="font-(family-name:--font-fraunces) text-xl text-[#21251A] dark:text-[#ECE8D8] m-0">

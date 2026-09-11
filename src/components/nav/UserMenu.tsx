@@ -64,13 +64,7 @@ export function UserMenu({
             href="/dashboard/profile"
             className="text-sm px-3 py-2 rounded-lg text-[#21251A] dark:text-[#ECE8D8] hover:bg-[#EEE8D6] dark:hover:bg-[#24311C]"
           >
-            Profile
-          </a>
-          <a
-            href="/dashboard/settings"
-            className="text-sm px-3 py-2 rounded-lg text-[#21251A] dark:text-[#ECE8D8] hover:bg-[#EEE8D6] dark:hover:bg-[#24311C]"
-          >
-            Settings
+            Profile &amp; settings
           </a>
           <div className="h-px my-1 mx-1 bg-[#EEE8D6] dark:bg-[#24311C]" />
           <button

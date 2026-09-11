@@ -35,7 +35,6 @@ export default async function DashboardPage() {
           today={today}
           completedToday={data.todayCompletedCount}
           totalActive={data.totalActiveHabits}
-          stage={data.plantStage}
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-[1.1fr_1.1fr_0.9fr] gap-3.5">
