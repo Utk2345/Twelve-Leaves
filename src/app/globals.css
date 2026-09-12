@@ -24,6 +24,14 @@
   animation-delay: 200ms;
 }
 
+/* Set synchronously by the beforeInteractive script in layout.tsx, before
+   first paint, when sessionStorage already shows the intro was seen this
+   session — hides the overlay with zero flash instead of it appearing and
+   then disappearing once React hydrates. */
+html.intro-seen .intro-overlay {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grow-in {
     animation: none;
