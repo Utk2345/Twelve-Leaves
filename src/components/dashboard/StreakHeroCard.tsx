@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { DailyBucket } from "@/lib/dashboard";
 
 export function StreakHeroCard({
@@ -15,22 +16,15 @@ export function StreakHeroCard({
                  text-[#ECE8D8] bg-[#16210F] dark:bg-[#0D140A]
                  shadow-[0_18px_40px_-18px_rgba(20,30,15,0.55)]"
       style={{
-        backgroundImage:
-          "radial-gradient(60% 80% at 50% 0%, color-mix(in srgb, #D9A544 30%, transparent), transparent 70%)",
+        backgroundImage: "url(/card-gradient.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <span className="text-xs font-medium text-[#C7C4AE]">Current streak</span>
 
       <div className="relative w-14 h-14 flex items-center justify-center">
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: "radial-gradient(circle, color-mix(in srgb, #D9A544 55%, transparent), transparent 70%)",
-          }}
-        />
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#D9A544" className="relative">
-          <path d="M12 2c1 3-2 4-2 7a4 4 0 1 0 8 0c0-1-.5-2-1-2 1 4-1 5-2 5-2 0-2-2-1-4-2 .5-4 3-4 6a5 5 0 0 0 10 0c0-6-5-8-8-12Z" />
-        </svg>
+        <Image src="/streak-flame.png" alt="" width={40} height={40} className="relative object-contain" />
       </div>
 
       <span className="font-(family-name:--font-fraunces) text-4xl leading-none">{streak}</span>

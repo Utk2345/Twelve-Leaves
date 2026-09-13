@@ -1,17 +1,29 @@
+import Image from "next/image";
 import type { PlantStage } from "@/lib/growth";
+import { plantImageFor } from "@/lib/plant-art";
 
 const STAGES: PlantStage[] = ["seed", "sprout", "bloom"];
+
+const STAGE_IMAGE: Record<PlantStage, { src: string; width: number; height: number }> = {
+  seed: { src: "/plants/seed.png", width: 60, height: 48 },
+  sprout: { src: "/plants/sprout.png", width: 64, height: 64 },
+  bloom: { src: "/plants/bloom.png", width: 52, height: 72 },
+};
 
 export function GardenSnapshot({
   growthPoints,
   stage,
   pointsToNext,
+  selectedPlantId,
 }: {
   growthPoints: number;
   stage: PlantStage;
   pointsToNext: number | null;
+  selectedPlantId?: string | null;
 }) {
   const stageIndex = STAGES.indexOf(stage);
+  const image = STAGE_IMAGE[stage];
+  const src = stage === "bloom" && selectedPlantId ? (plantImageFor(selectedPlantId) ?? image.src) : image.src;
 
   return (
     <section className="flex flex-col gap-3">
@@ -30,33 +42,20 @@ export function GardenSnapshot({
                    shadow-[0_14px_32px_-16px_rgba(40,36,20,0.22),0_2px_8px_rgba(40,36,20,0.06)]
                    dark:shadow-[0_14px_32px_-16px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.3)]"
         style={{
-          backgroundImage:
-            "radial-gradient(90% 140% at 15% 120%, color-mix(in srgb, #D9A544 30%, transparent), transparent 65%), radial-gradient(90% 140% at 85% -20%, color-mix(in srgb, #86A971 40%, transparent), transparent 60%)",
+          backgroundImage: "url(/card-gradient.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <svg className="grow-in shrink-0" width="64" height="72" viewBox="0 0 200 220" aria-hidden="true">
-          <ellipse cx="100" cy="196" rx="70" ry="14" className="fill-[#33502F] dark:fill-[#82B27C]" opacity="0.2" />
-          <path
-            d="M100 190 C100 150 100 140 100 120"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-            className="stroke-[#33502F] dark:stroke-[#82B27C]"
-          />
-          {stageIndex >= 1 && (
-            <>
-              <path
-                d="M100 140 C80 132 70 118 74 104 C90 108 100 122 100 140 Z"
-                className="fill-[#86A971] dark:fill-[#9AC286]"
-              />
-              <path
-                d="M100 150 C120 142 130 128 126 114 C110 118 100 132 100 150 Z"
-                className="fill-[#86A971] dark:fill-[#9AC286]"
-              />
-            </>
-          )}
-          {stageIndex >= 2 && <circle cx="100" cy="108" r="14" className="fill-[#D9A544] dark:fill-[#E6BD6C]" />}
-        </svg>
+        <Image
+          key={src}
+          src={src}
+          alt=""
+          width={image.width}
+          height={image.height}
+          className="grow-in shrink-0 object-contain"
+          aria-hidden="true"
+        />
 
         <div>
           <p className="font-(family-name:--font-fraunces) text-xl text-[#21251A] dark:text-[#ECE8D8] m-0">

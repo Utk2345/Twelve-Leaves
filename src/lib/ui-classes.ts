@@ -3,7 +3,10 @@
 // Plain strings (not a CSS-in-JS system) to match the rest of the codebase's
 // arbitrary-Tailwind-value convention.
 
-export const PAGE_BG = "bg-[#F5F0E2] dark:bg-[#131C10]";
+// The page background now lives on <body> (see src/app/layout.tsx, tl-background.jpg),
+// so this is intentionally empty. Kept as an export so existing
+// `min-h-screen ${PAGE_BG}` call sites don't need to change.
+export const PAGE_BG = "";
 
 export const CARD =
   "rounded-[22px] bg-[#FFFEFB] dark:bg-[#1C2717] " +

@@ -5,7 +5,6 @@ import { db } from "@/db";
 import { completions, habits } from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { getUserTimeZone, localDateStringIn } from "@/lib/timezone";
-import { getTheme } from "@/lib/theme";
 import { computeStreaks } from "@/lib/streak";
 import { AppNav } from "@/components/nav/AppNav";
 import { AddHabitForm } from "@/components/habits/AddHabitForm";
@@ -17,10 +16,9 @@ export default async function HabitsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) redirect("/sign-in");
 
-  const [allHabits, timeZone, theme] = await Promise.all([
+  const [allHabits, timeZone] = await Promise.all([
     db.select().from(habits).where(eq(habits.userId, session.user.id)).orderBy(asc(habits.createdAt)),
     getUserTimeZone(),
-    getTheme(),
   ]);
 
   // One query for every completion across this user's habits, grouped
@@ -51,7 +49,7 @@ export default async function HabitsPage() {
 
   return (
     <div className={`min-h-screen ${PAGE_BG}`}>
-      <AppNav theme={theme} userName={session.user.name ?? session.user.email} userImage={session.user.image} />
+      <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
       <main className="mx-auto max-w-2xl px-4 sm:px-6 py-8 flex flex-col gap-6">
         <MidnightRefresher />

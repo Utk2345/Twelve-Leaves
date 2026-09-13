@@ -11,7 +11,7 @@ const PROVIDERS = [
 ] as const;
 
 export function LinkedAccountsCard() {
-  const [accounts, setAccounts] = useState<{ provider: string }[] | null>(null);
+  const [accounts, setAccounts] = useState<{ id: string; providerId: string }[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busyProvider, setBusyProvider] = useState<string | null>(null);
 
@@ -25,9 +25,12 @@ export function LinkedAccountsCard() {
   }, []);
 
   async function handleUnlink(providerId: string) {
+    const account = accounts?.find((a) => a.providerId === providerId);
+    if (!account) return;
+
     setError(null);
     setBusyProvider(providerId);
-    const result = await authClient.unlinkAccount({ providerId });
+    const result = await authClient.unlinkAccount({ accountId: account.id });
     setBusyProvider(null);
     if (result.error) {
       setError(result.error.message ?? "Couldn't disconnect that account.");
@@ -51,7 +54,7 @@ export function LinkedAccountsCard() {
 
       <div className="flex flex-col divide-y divide-[#EEE8D6] dark:divide-[#24311C]">
         {PROVIDERS.map((p) => {
-          const connected = accounts.some((a) => a.provider === p.id);
+          const connected = accounts.some((a) => a.providerId === p.id);
           const isOnlyMethod = connected && connectedCount === 1;
 
           return (

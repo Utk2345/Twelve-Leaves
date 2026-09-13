@@ -27,6 +27,7 @@ export type DashboardData = {
   totalCompletions: number;
   growthPoints: number;
   plantStage: PlantStage;
+  selectedPlantId: string | null;
   pointsToNext: number | null;
   unlockedCount: number;
   totalPlants: number;
@@ -134,6 +135,7 @@ export async function getDashboardData(userId: string, today: string): Promise<D
     totalCompletions,
     growthPoints,
     plantStage: getPlantStage(growthPoints),
+    selectedPlantId: gardenRows[0]?.selectedPlantId ?? null,
     pointsToNext: pointsToNextStage(growthPoints),
     unlockedCount: grid.filter((entry) => entry.unlockedAt !== null).length,
     totalPlants: grid.length,

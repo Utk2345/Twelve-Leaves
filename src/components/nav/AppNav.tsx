@@ -1,9 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "./ThemeToggle";
 import { UserMenu } from "./UserMenu";
-import type { Theme } from "@/lib/theme-constants";
 
 const LINKS = [
   { href: "/dashboard", label: "Dashboard" },
@@ -13,11 +11,9 @@ const LINKS = [
 ];
 
 export function AppNav({
-  theme,
   userName,
   userImage,
 }: {
-  theme: Theme;
   userName: string;
   userImage?: string | null;
 }) {
@@ -63,7 +59,6 @@ export function AppNav({
         </div>
 
         <div className="flex items-center gap-1.5">
-          <ThemeToggle initialTheme={theme} />
           <UserMenu userName={userName} userImage={userImage} />
         </div>
       </nav>

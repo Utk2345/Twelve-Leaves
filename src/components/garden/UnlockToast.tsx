@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import { plantImageFor } from "@/lib/plant-art";
 
 export type UnlockedPlantInfo = { id: string; name: string; emoji: string };
 
@@ -38,11 +40,16 @@ export function UnlockToast({
                    text-[#ECE8D8] bg-[#16210F] dark:bg-[#0D140A]
                    shadow-[0_18px_40px_-18px_rgba(20,30,15,0.55)]"
         style={{
-          backgroundImage:
-            "radial-gradient(80% 140% at 15% 0%, color-mix(in srgb, #D9A544 25%, transparent), transparent 70%)",
+          backgroundImage: "url(/card-gradient.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
-        <span className="text-2xl leading-none">{plants[0].emoji}</span>
+        {plantImageFor(plants[0].id) ? (
+          <Image src={plantImageFor(plants[0].id)!} alt="" width={32} height={32} className="object-contain" />
+        ) : (
+          <span className="text-2xl leading-none">{plants[0].emoji}</span>
+        )}
         <div className="flex flex-col">
           <span className="font-[family-name:var(--font-fraunces)] text-base">
             New plant unlocked: {plants[0].name}

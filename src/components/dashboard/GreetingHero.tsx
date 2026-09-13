@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 function greetingWord(hour: number): string {
   if (hour < 12) return "Good morning";
   if (hour < 18) return "Good afternoon";
@@ -32,8 +34,9 @@ export function GreetingHero({
                  dark:shadow-[0_14px_32px_-16px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.3)]
                  bg-[#EEE8D6] dark:bg-[#24311C]"
       style={{
-        backgroundImage:
-          "radial-gradient(120% 140% at 85% -10%, color-mix(in srgb, #D9A544 35%, transparent), transparent 60%), radial-gradient(100% 120% at 10% 110%, color-mix(in srgb, #86A971 45%, transparent), transparent 65%)",
+        backgroundImage: "url(/card-gradient.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <div className="min-w-0">
@@ -48,23 +51,14 @@ export function GreetingHero({
       </div>
 
       <div className="relative shrink-0">
-        <svg className="grow-in" width="64" height="72" viewBox="0 0 200 220" aria-hidden="true">
-          <path
-            d="M100 190 C100 150 100 140 100 120"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-            className="stroke-[#33502F] dark:stroke-[#82B27C]"
-          />
-          <path
-            d="M100 140 C80 132 70 118 74 104 C90 108 100 122 100 140 Z"
-            className="fill-[#86A971] dark:fill-[#9AC286]"
-          />
-          <path
-            d="M100 150 C120 142 130 128 126 114 C110 118 100 132 100 150 Z"
-            className="fill-[#86A971] dark:fill-[#9AC286]"
-          />
-        </svg>
+        <Image
+          src="/plants/sprout.png"
+          alt=""
+          width={64}
+          height={72}
+          className="grow-in object-contain"
+          aria-hidden="true"
+        />
         <div
           className="absolute -left-2 -bottom-2 w-8 h-8 rounded-full flex items-center justify-center
                      bg-[#33502F] dark:bg-[#82B27C] text-[#F5F0E2] dark:text-[#0D140A]

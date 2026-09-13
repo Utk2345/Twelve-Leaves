@@ -154,6 +154,11 @@ export const gardenState = pgTable("garden_state", {
     .primaryKey()
     .references(() => user.id, { onDelete: "cascade" }),
   growthPoints: integer("growth_points").notNull().default(0),
+  // Which unlocked catalog plant to show as the "active" plant at the
+  // bloom stage. Null = default bloom art. Only settable once the user has
+  // reached bloom (see PATCH /api/garden/selected-plant), and only ever
+  // points at a plant the user has actually unlocked.
+  selectedPlantId: text("selected_plant_id").references(() => plants.id, { onDelete: "set null" }),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
@@ -195,6 +200,10 @@ export const completionsRelations = relations(completions, ({ one }) => ({
 
 export const gardenStateRelations = relations(gardenState, ({ one }) => ({
   user: one(user, { fields: [gardenState.userId], references: [user.id] }),
+  selectedPlant: one(plants, {
+    fields: [gardenState.selectedPlantId],
+    references: [plants.id],
+  }),
 }));
 
 export const plantsRelations = relations(plants, ({ many }) => ({

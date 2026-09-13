@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getTheme } from "@/lib/theme";
 import { IntroAnimation } from "@/components/marketing/IntroAnimation";
 import { MarketingNav } from "@/components/marketing/MarketingNav";
 import { GrowthStrip } from "@/components/marketing/GrowthStrip";
@@ -42,13 +41,11 @@ const REASONS = [
 ];
 
 export default async function Home() {
-  const theme = await getTheme();
-
   return (
     <>
       <IntroAnimation />
 
-      <MarketingNav theme={theme} />
+      <MarketingNav />
 
       <main className="flex-1">
         {/* Hero */}

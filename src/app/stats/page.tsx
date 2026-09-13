@@ -2,7 +2,6 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { getUserTimeZone } from "@/lib/timezone";
-import { getTheme } from "@/lib/theme";
 import { getOverallStats } from "@/lib/stats";
 import { getGardenGrid } from "@/lib/unlocks";
 import { AppNav } from "@/components/nav/AppNav";
@@ -15,7 +14,7 @@ export default async function StatsPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) redirect("/sign-in");
 
-  const [timeZone, theme] = await Promise.all([getUserTimeZone(), getTheme()]);
+  const timeZone = await getUserTimeZone();
 
   const [{ totalCompletions, longestStreakOverall, habitStats, weeklyBuckets }, grid] = await Promise.all([
     getOverallStats(session.user.id, timeZone),
@@ -27,7 +26,7 @@ export default async function StatsPage() {
 
   return (
     <div className={`min-h-screen ${PAGE_BG}`}>
-      <AppNav theme={theme} userName={session.user.name ?? session.user.email} userImage={session.user.image} />
+      <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
       <main className="mx-auto max-w-2xl px-4 sm:px-6 py-8 flex flex-col gap-7">
         <div className="flex flex-col gap-1 px-1">

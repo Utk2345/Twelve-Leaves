@@ -1,9 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ThemeToggle } from "@/components/nav/ThemeToggle";
-import type { Theme } from "@/lib/theme-constants";
 
-export function MarketingNav({ theme }: { theme: Theme }) {
+export function MarketingNav() {
   return (
     <div className="sticky top-3.5 z-20 px-4 sm:px-5">
       <nav
@@ -28,7 +26,6 @@ export function MarketingNav({ theme }: { theme: Theme }) {
         </Link>
 
         <div className="flex items-center gap-1.5">
-          <ThemeToggle initialTheme={theme} />
           <Link
             href="/sign-in"
             className="text-[13px] font-medium px-3.5 py-2 rounded-full transition-colors
