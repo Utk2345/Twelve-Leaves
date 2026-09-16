@@ -32,7 +32,7 @@ export default async function GardenPage() {
     <div className={`min-h-screen ${PAGE_BG}`}>
       <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
-      <main className="mx-auto max-w-3xl px-4 sm:px-6 py-8 flex flex-col items-center gap-7 text-center">
+      <main className="mx-auto max-w-3xl px-4 sm:px-6 pb-24 sm:pb-8 pt-8 flex flex-col items-center gap-7 text-center">
         <div className="flex flex-col gap-1">
           <h1 className={`font-[family-name:var(--font-fraunces)] text-3xl ${INK}`}>Your garden</h1>
           <p className={`text-sm ${INK_MUTED}`}>

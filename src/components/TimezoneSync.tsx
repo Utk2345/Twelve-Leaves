@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { setBrowserCookie } from "@/lib/browser-cookie";
 
 const TIMEZONE_COOKIE = "tz";
 
@@ -22,7 +23,7 @@ export function TimezoneSync() {
       ?.split("=")[1];
 
     if (existing !== detected) {
-      document.cookie = `${TIMEZONE_COOKIE}=${detected}; path=/; max-age=31536000; SameSite=Lax`;
+      setBrowserCookie(TIMEZONE_COOKIE, detected, 31536000);
       router.refresh();
     }
   }, [router]);

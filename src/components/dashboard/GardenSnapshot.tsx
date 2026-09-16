@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { PlantStage } from "@/lib/growth";
+import type { PlantStage } from "@/lib/plant-stage";
 import { plantImageFor } from "@/lib/plant-art";
 
 const STAGES: PlantStage[] = ["seed", "sprout", "bloom"];
@@ -42,7 +42,7 @@ export function GardenSnapshot({
                    shadow-[0_14px_32px_-16px_rgba(40,36,20,0.22),0_2px_8px_rgba(40,36,20,0.06)]
                    dark:shadow-[0_14px_32px_-16px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.3)]"
         style={{
-          backgroundImage: "url(/card-gradient.png)",
+          backgroundImage: "url(/card-gradient.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

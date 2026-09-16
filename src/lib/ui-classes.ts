@@ -3,7 +3,7 @@
 // Plain strings (not a CSS-in-JS system) to match the rest of the codebase's
 // arbitrary-Tailwind-value convention.
 
-// The page background now lives on <body> (see src/app/layout.tsx, tl-background.jpg),
+// The page background now lives on <body> (see src/app/layout.tsx, tl-background.webp),
 // so this is intentionally empty. Kept as an export so existing
 // `min-h-screen ${PAGE_BG}` call sites don't need to change.
 export const PAGE_BG = "";

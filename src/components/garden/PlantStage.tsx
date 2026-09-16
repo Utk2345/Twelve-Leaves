@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { PlantStage as Stage } from "@/lib/growth";
+import type { PlantStage as Stage } from "@/lib/plant-stage";
 
 // Real watercolor illustrations (see /public/plants). `sprout.png` already
 // has its own soil mound baked into the artwork, so we skip drawing a second

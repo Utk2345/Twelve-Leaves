@@ -28,7 +28,7 @@ export default async function StatsPage() {
     <div className={`min-h-screen ${PAGE_BG}`}>
       <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
-      <main className="mx-auto max-w-2xl px-4 sm:px-6 py-8 flex flex-col gap-7">
+      <main className="mx-auto max-w-2xl px-4 sm:px-6 pb-24 sm:pb-8 pt-8 flex flex-col gap-7">
         <div className="flex flex-col gap-1 px-1">
           <h1 className={`font-[family-name:var(--font-fraunces)] text-3xl ${INK}`}>Your stats</h1>
           <p className={`text-sm ${INK_MUTED}`}>{hasHabits ? "How your garden's growing." : "Nothing to show yet."}</p>

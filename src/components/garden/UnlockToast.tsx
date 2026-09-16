@@ -40,7 +40,7 @@ export function UnlockToast({
                    text-[#ECE8D8] bg-[#16210F] dark:bg-[#0D140A]
                    shadow-[0_18px_40px_-18px_rgba(20,30,15,0.55)]"
         style={{
-          backgroundImage: "url(/card-gradient.png)",
+          backgroundImage: "url(/card-gradient.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

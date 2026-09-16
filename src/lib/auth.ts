@@ -1,3 +1,5 @@
+import "server-only";
+
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
@@ -8,6 +10,15 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
+  // Explicit, but not a behavior change: this is Better Auth's own default
+  // (secure + httpOnly cookies whenever NODE_ENV === "production", which
+  // Vercel sets on every deployment including previews). Written out here
+  // so "session cookies are Secure in production" is a checked-in fact,
+  // not an inferred one. Local `next dev` (NODE_ENV=development, http)
+  // is unaffected — cookies there remain non-Secure as before.
+  advanced: {
+    useSecureCookies: process.env.NODE_ENV === "production",
+  },
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,

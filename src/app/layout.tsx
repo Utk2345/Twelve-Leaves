@@ -16,7 +16,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body
         className="min-h-full flex flex-col bg-[#F5F0E2] text-[#21251A] font-[family-name:var(--font-public-sans)]"
         style={{
-          backgroundImage: "url(/tl-background.jpg)",
+          backgroundImage: "url(/tl-background.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

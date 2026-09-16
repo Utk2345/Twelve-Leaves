@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { STAGE_THRESHOLDS, type PlantStage } from "@/lib/growth";
+import { STAGE_THRESHOLDS, type PlantStage } from "@/lib/plant-stage";
 import type { Plant } from "@/lib/unlocks";
 import { plantImageFor } from "@/lib/plant-art";
 import { PlantStageTransition } from "./PlantStageTransition";
@@ -65,7 +65,7 @@ export function GardenInteractive({
       <div
         className="relative rounded-[32px] px-10 py-10 flex flex-col items-center gap-4"
         style={{
-          backgroundImage: "url(/card-gradient.png)",
+          backgroundImage: "url(/card-gradient.webp)",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

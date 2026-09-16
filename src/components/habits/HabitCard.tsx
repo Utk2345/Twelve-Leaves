@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { habits } from "@/db/schema";
+import type { habits } from "@/db/schema";
 import type { Streaks } from "@/lib/streak";
 import { localDateString } from "@/lib/date";
 import { UnlockToast, type UnlockedPlantInfo } from "@/components/garden/UnlockToast";

@@ -34,7 +34,7 @@ export function GreetingHero({
                  dark:shadow-[0_14px_32px_-16px_rgba(0,0,0,0.55),0_2px_8px_rgba(0,0,0,0.3)]
                  bg-[#EEE8D6] dark:bg-[#24311C]"
       style={{
-        backgroundImage: "url(/card-gradient.png)",
+        backgroundImage: "url(/card-gradient.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

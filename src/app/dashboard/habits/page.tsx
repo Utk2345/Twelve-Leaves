@@ -51,7 +51,7 @@ export default async function HabitsPage() {
     <div className={`min-h-screen ${PAGE_BG}`}>
       <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
-      <main className="mx-auto max-w-2xl px-4 sm:px-6 py-8 flex flex-col gap-6">
+      <main className="mx-auto max-w-2xl px-4 sm:px-6 pb-24 sm:pb-8 pt-8 flex flex-col gap-6">
         <MidnightRefresher />
 
         <div className="flex flex-col gap-1 px-1">

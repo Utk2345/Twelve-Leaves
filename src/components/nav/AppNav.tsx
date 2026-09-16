@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { UserMenu } from "./UserMenu";
+import { MobileTabBar } from "./MobileTabBar";
 
 const LINKS = [
   { href: "/dashboard", label: "Dashboard" },
@@ -20,6 +21,7 @@ export function AppNav({
   const pathname = usePathname();
 
   return (
+    <>
     <div className="sticky top-3.5 z-20 px-4 sm:px-5">
       <nav
         className="max-w-[800px] mx-auto flex items-center justify-between gap-3
@@ -63,5 +65,7 @@ export function AppNav({
         </div>
       </nav>
     </div>
+    <MobileTabBar pathname={pathname} />
+    </>
   );
 }

@@ -28,7 +28,7 @@ export default async function DashboardPage() {
     <div className="min-h-screen">
       <AppNav userName={session.user.name ?? session.user.email} userImage={session.user.image} />
 
-      <main className="mx-auto max-w-[800px] px-4 sm:px-5 py-8 flex flex-col gap-7">
+      <main className="mx-auto max-w-[800px] px-4 sm:px-5 pb-24 sm:pb-8 pt-8 flex flex-col gap-7">
         <GreetingHero
           name={firstName}
           today={today}

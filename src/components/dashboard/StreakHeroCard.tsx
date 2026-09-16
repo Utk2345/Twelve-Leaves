@@ -16,7 +16,7 @@ export function StreakHeroCard({
                  text-[#ECE8D8] bg-[#16210F] dark:bg-[#0D140A]
                  shadow-[0_18px_40px_-18px_rgba(20,30,15,0.55)]"
       style={{
-        backgroundImage: "url(/card-gradient.png)",
+        backgroundImage: "url(/card-gradient.webp)",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -24,7 +24,7 @@ export function StreakHeroCard({
       <span className="text-xs font-medium text-[#C7C4AE]">Current streak</span>
 
       <div className="relative w-14 h-14 flex items-center justify-center">
-        <Image src="/streak-flame.png" alt="" width={40} height={40} className="relative object-contain" />
+        <Image src="/streak-flame.webp" alt="" width={40} height={40} className="relative object-contain" />
       </div>
 
       <span className="font-(family-name:--font-fraunces) text-4xl leading-none">{streak}</span>

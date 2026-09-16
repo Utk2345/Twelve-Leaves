@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { THEME_COOKIE, type Theme } from "@/lib/theme-constants";
+import { setBrowserCookie } from "@/lib/browser-cookie";
 
 export function ThemeToggle({ initialTheme }: { initialTheme: Theme }) {
   const [isDark, setIsDark] = useState(initialTheme === "dark");
@@ -9,7 +10,7 @@ export function ThemeToggle({ initialTheme }: { initialTheme: Theme }) {
   function toggle() {
     const next: Theme = isDark ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
-    document.cookie = `${THEME_COOKIE}=${next}; path=/; max-age=31536000; SameSite=Lax`;
+    setBrowserCookie(THEME_COOKIE, next, 31536000);
     setIsDark(next === "dark");
   }
 
