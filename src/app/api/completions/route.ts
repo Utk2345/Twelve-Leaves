@@ -8,6 +8,7 @@ import { computeStreaks } from "@/lib/streak";
 import { addGrowthPoints, computeGrowthPoints } from "@/lib/growth";
 import { unlockEligiblePlants } from "@/lib/unlocks";
 import { getUserTimeZoneFromRequest, localDateStringIn } from "@/lib/timezone";
+import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 
 // POST /api/completions — mark a habit complete for a given day (defaults
 // to the caller's local today). Idempotent: calling it twice for the same
@@ -16,6 +17,19 @@ export async function POST(req: NextRequest) {
   const session = await auth.api.getSession({ headers: req.headers });
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Per-user, not per-IP — this is an authenticated endpoint, and the risk
+  // is a signed-in user (or a compromised session) scripting rapid calls to
+  // farm growth points, not anonymous abuse. 30/min is generous for genuine
+  // use (PRD scopes habit counts to roughly 3–10 concurrent) while still
+  // capping a scripted loop.
+  const rateLimit = await checkRateLimit(`completions:${session.user.id}`, {
+    windowSeconds: 60,
+    max: 30,
+  });
+  if (!rateLimit.allowed) {
+    return rateLimitResponse(rateLimit.retryAfterSeconds);
   }
 
   const body = await req.json().catch(() => null);

@@ -78,7 +78,7 @@ export function GardenGrid({
             )}
             <span
               className={`font-[family-name:var(--font-fraunces)] text-sm ${
-                unlocked ? INK : "text-[#B7AF98] dark:text-[#5C6150]"
+                unlocked ? INK : "text-[#6F674E] dark:text-[#5C6150]"
               }`}
             >
               {unlocked ? plant.name : "???"}
@@ -87,7 +87,7 @@ export function GardenGrid({
               <span className="text-[10px] uppercase tracking-wide text-[#33502F] dark:text-[#82B27C]">Active</span>
             )}
             {isRecent && !isSelected && (
-              <span className="text-[10px] uppercase tracking-wide text-[#B9862E] dark:text-[#E6BD6C]">New</span>
+              <span className="text-[10px] uppercase tracking-wide text-[#8C6523] dark:text-[#E6BD6C]">New</span>
             )}
             {!unlocked && (
               <span className={`text-[11px] ${INK_FAINT}`}>

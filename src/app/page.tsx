@@ -156,7 +156,15 @@ export default async function Home() {
           <span className={`font-[family-name:var(--font-fraunces)] italic text-[13px] ${INK_MUTED}`}>
             Twelve Leaves
           </span>
-          <span className={`text-[12px] ${INK_MUTED}`}>Grow a garden by building habits.</span>
+          <div className="flex items-center gap-4">
+            <span className={`text-[12px] ${INK_MUTED}`}>Grow a garden by building habits.</span>
+            <Link href="/terms" className={`text-[12px] underline ${INK_MUTED}`}>
+              Terms
+            </Link>
+            <Link href="/privacy" className={`text-[12px] underline ${INK_MUTED}`}>
+              Privacy
+            </Link>
+          </div>
         </div>
       </footer>
     </>

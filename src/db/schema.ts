@@ -2,6 +2,7 @@ import {
   pgTable,
   text,
   integer,
+  bigint,
   boolean,
   timestamp,
   date,
@@ -90,6 +91,22 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)]
 );
 
+// Better Auth's own rate-limit storage table (src/lib/auth.ts sets
+// rateLimit.storage: "database"). Schema matches Better Auth's documented
+// shape: https://better-auth.com/docs/concepts/rate-limit#schema
+// Memory storage (the default) doesn't work reliably on Vercel — each
+// serverless invocation can land on a different instance with no shared
+// state, so counts would silently reset per-request.
+export const rateLimit = pgTable("rateLimit", {
+  id: text("id").primaryKey(),
+  key: text("key").notNull().unique(),
+  count: integer("count").notNull(),
+  // epoch milliseconds — must be bigint, a 32-bit integer overflows almost
+  // immediately (current epoch-ms is already ~1.76 trillion vs a ~2.1
+  // billion signed-int32 ceiling).
+  lastRequest: bigint("last_request", { mode: "number" }).notNull(),
+});
+
 export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
@@ -112,6 +129,18 @@ export const accountRelations = relations(account, ({ one }) => ({
 // ============================================================
 // App tables
 // ============================================================
+
+// Generic fixed-window rate limiter for our own API routes (Better Auth's
+// rateLimit table above only covers /api/auth/*). See src/lib/rate-limit.ts
+// for the atomic upsert that reads/writes this — kept as a separate table
+// from Better Auth's own "rateLimit" rather than sharing it, since Better
+// Auth manages that table's rows itself and mixing in unrelated keys risks
+// interfering with its own bookkeeping.
+export const apiRateLimit = pgTable("api_rate_limit", {
+  key: text("key").primaryKey(),
+  count: integer("count").notNull().default(1),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull().defaultNow(),
+});
 
 // ---------- habits ----------
 export const habits = pgTable("habits", {

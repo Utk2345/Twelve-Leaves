@@ -94,11 +94,11 @@ export function TodayHabitsCard({ habits }: { habits: TodayHabit[] }) {
                 {habit.name}
               </span>
               {habit.currentStreak > 0 && (
-                <span className="font-(family-name:--font-fraunces) italic text-xs text-[#D9A544] ml-1.5">
+                <span className="font-(family-name:--font-fraunces) italic text-xs text-[#8C6523] ml-1.5">
                   {habit.currentStreak}-day streak
                 </span>
               )}
-              <div className="text-xs text-[#8B8A72] dark:text-[#757058] mt-0.5">{habit.targetPerWeek}x / week</div>
+              <div className="text-xs text-[#696856] dark:text-[#757058] mt-0.5">{habit.targetPerWeek}x / week</div>
             </div>
 
             {habit.completedToday ? (

@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CARD, INK, INK_MUTED, DANGER, BTN_PRIMARY } from "@/lib/ui-classes";
+import { createHabitSchema } from "@/lib/validations/habit";
 
 export function AddHabitForm() {
   const router = useRouter();
@@ -16,10 +17,16 @@ export function AddHabitForm() {
     e.preventDefault();
     setError(null);
 
+    const parsed = createHabitSchema.safeParse({ name, targetPerWeek });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Check the form and try again.");
+      return;
+    }
+
     const res = await fetch("/api/habits", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, targetPerWeek }),
+      body: JSON.stringify(parsed.data),
     });
 
     if (!res.ok) {
@@ -58,10 +65,11 @@ export function AddHabitForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Morning walk"
+          maxLength={80}
           className={`font-[family-name:var(--font-fraunces)] text-lg ${INK}
                       bg-transparent border-b border-[#D8D2C2] dark:border-[#333B27]
                       focus:border-[#33502F] dark:focus:border-[#82B27C]
-                      outline-none py-1 placeholder:text-[#B7AF98] dark:placeholder:text-[#5C6150]`}
+                      outline-none py-1 placeholder:text-[#6F674E] dark:placeholder:text-[#5C6150]`}
         />
       </div>
 

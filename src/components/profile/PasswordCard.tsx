@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { CARD, INK, INK_MUTED, DANGER, BTN_PRIMARY } from "@/lib/ui-classes";
+import { changePasswordSchema } from "@/lib/validations/profile";
 
 const FIELD =
   "bg-transparent border-b border-[#D8D2C2] dark:border-[#333B27] " +
@@ -28,12 +29,14 @@ function PasswordField({
   value,
   onChange,
   minLength,
+  maxLength,
 }: {
   placeholder: string;
   autoComplete: string;
   value: string;
   onChange: (v: string) => void;
   minLength?: number;
+  maxLength?: number;
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -48,6 +51,7 @@ function PasswordField({
         className={FIELD}
         required
         minLength={minLength}
+        maxLength={maxLength}
       />
       <button
         type="button"
@@ -82,19 +86,16 @@ export function PasswordCard() {
     setError(null);
     setSuccess(false);
 
-    if (newPassword.length < 8) {
-      setError("New password must be at least 8 characters.");
-      return;
-    }
-    if (newPassword !== confirmPassword) {
-      setError("New passwords don't match.");
+    const parsed = changePasswordSchema.safeParse({ currentPassword, newPassword, confirmPassword });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "That password isn't valid.");
       return;
     }
 
     setSaving(true);
     const result = await authClient.changePassword({
-      currentPassword,
-      newPassword,
+      currentPassword: parsed.data.currentPassword,
+      newPassword: parsed.data.newPassword,
       revokeOtherSessions: true,
     });
     setSaving(false);
@@ -139,6 +140,7 @@ export function PasswordCard() {
             value={newPassword}
             onChange={setNewPassword}
             minLength={8}
+            maxLength={128}
           />
           <PasswordField
             placeholder="Confirm new password"
@@ -146,6 +148,7 @@ export function PasswordCard() {
             value={confirmPassword}
             onChange={setConfirmPassword}
             minLength={8}
+            maxLength={128}
           />
 
           {error && <p className={`text-sm ${DANGER} m-0`}>{error}</p>}

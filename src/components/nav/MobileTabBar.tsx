@@ -79,7 +79,7 @@ export function MobileTabBar({ pathname }: { pathname: string }) {
               className={`flex flex-1 flex-col items-center gap-0.5 rounded-2xl px-2 py-2 text-[11px] font-medium transition-colors ${
                 active
                   ? "text-[#33502F] dark:text-[#82B27C]"
-                  : "text-[#8B8A72] dark:text-[#757058]"
+                  : "text-[#696856] dark:text-[#757058]"
               }`}
             >
               <Icon className={active ? "" : "opacity-80"} />

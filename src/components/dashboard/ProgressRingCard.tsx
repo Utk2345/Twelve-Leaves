@@ -58,7 +58,7 @@ export function ProgressRingCard({ completed, total }: { completed: number; tota
           <span className="font-(family-name:--font-fraunces) text-xl text-[#21251A] dark:text-[#ECE8D8]">
             {total > 0 ? `${Math.round(pct * 100)}%` : "—"}
           </span>
-          <span className="text-[10px] text-[#8B8A72] dark:text-[#757058]">
+          <span className="text-[10px] text-[#696856] dark:text-[#757058]">
             {total > 0 ? `${completed} of ${total}` : "No habits yet"}
           </span>
         </div>

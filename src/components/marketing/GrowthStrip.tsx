@@ -32,7 +32,7 @@ export function GrowthStrip() {
                 <div className="font-[family-name:var(--font-fraunces)] italic text-[13px] text-[#21251A] dark:text-[#ECE8D8]">
                   {stage.note}
                 </div>
-                <div className="text-[11px] text-[#8B8A72] dark:text-[#757058] mt-0.5">{stage.label}</div>
+                <div className="text-[11px] text-[#696856] dark:text-[#757058] mt-0.5">{stage.label}</div>
               </div>
             </div>
             {!last && (

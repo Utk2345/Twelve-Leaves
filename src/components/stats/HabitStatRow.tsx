@@ -9,7 +9,7 @@ export function HabitStatRow({ stat }: { stat: HabitStat }) {
       <div className="flex items-baseline justify-between gap-3">
         <span
           className={`font-(family-name:--font-fraunces) text-base truncate ${
-            stat.archived ? "text-[#8B8A72] line-through" : INK
+            stat.archived ? "text-[#696856] line-through" : INK
           }`}
         >
           {stat.name}
@@ -30,7 +30,7 @@ export function HabitStatRow({ stat }: { stat: HabitStat }) {
         {stat.currentStreak > 0 && (
           <>
             <span aria-hidden="true">·</span>
-            <span className="text-[#B9862E] dark:text-[#E6BD6C]">{stat.currentStreak}-day streak now</span>
+            <span className="text-[#8C6523] dark:text-[#E6BD6C]">{stat.currentStreak}-day streak now</span>
           </>
         )}
       </div>

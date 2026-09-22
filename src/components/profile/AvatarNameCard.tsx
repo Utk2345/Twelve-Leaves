@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { CARD, INK, INK_MUTED, DANGER, BTN_PRIMARY } from "@/lib/ui-classes";
+import { nameSchema } from "@/lib/validations/profile";
+import { AVATAR_ALLOWED_TYPES, AVATAR_ACCEPT_ATTR, AVATAR_MAX_BYTES, AVATAR_MAX_MB_LABEL } from "@/lib/validations/avatar";
 
 function initials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -36,6 +38,16 @@ export function AvatarNameCard({
 
     setError(null);
     setSuccess(null);
+
+    if (!AVATAR_ALLOWED_TYPES.has(file.type)) {
+      setError("Please upload a JPG, PNG, or WEBP image.");
+      return;
+    }
+    if (file.size > AVATAR_MAX_BYTES) {
+      setError(`Image must be under ${AVATAR_MAX_MB_LABEL}.`);
+      return;
+    }
+
     setUploading(true);
 
     const form = new FormData();
@@ -77,8 +89,15 @@ export function AvatarNameCard({
     e.preventDefault();
     setError(null);
     setSuccess(null);
+
+    const parsed = nameSchema.safeParse(name);
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "That name isn't valid.");
+      return;
+    }
+
     setSavingName(true);
-    const result = await authClient.updateUser({ name });
+    const result = await authClient.updateUser({ name: parsed.data });
     setSavingName(false);
     if (result.error) {
       setError(result.error.message ?? "Couldn't save your name.");
@@ -101,7 +120,7 @@ export function AvatarNameCard({
           >
             {image ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={image} alt="" className="w-full h-full object-cover" />
+              <img src={image} alt="Your profile photo" className="w-full h-full object-cover" />
             ) : (
               initials(name || "?")
             )}
@@ -133,11 +152,11 @@ export function AvatarNameCard({
               </button>
             )}
           </div>
-          <span className={`text-[11px] ${INK_MUTED}`}>JPG, PNG or WEBP. Up to 4MB.</span>
+          <span className={`text-[11px] ${INK_MUTED}`}>JPG, PNG or WEBP. Up to {AVATAR_MAX_MB_LABEL}.</span>
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp"
+            accept={AVATAR_ACCEPT_ATTR}
             onChange={handleFileChange}
             className="hidden"
           />
@@ -153,6 +172,7 @@ export function AvatarNameCard({
             id="profile-name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            maxLength={100}
             className={`flex-1 font-(family-name:--font-fraunces) text-lg ${INK}
                         bg-transparent border-b border-[#D8D2C2] dark:border-[#333B27]
                         focus:border-[#33502F] dark:focus:border-[#82B27C] outline-none py-1`}

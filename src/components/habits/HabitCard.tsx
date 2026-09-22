@@ -8,6 +8,7 @@ import type { Streaks } from "@/lib/streak";
 import { localDateString } from "@/lib/date";
 import { UnlockToast, type UnlockedPlantInfo } from "@/components/garden/UnlockToast";
 import { CARD, INK, INK_MUTED, INK_FAINT, DANGER, GOLD, BTN_PRIMARY } from "@/lib/ui-classes";
+import { updateHabitSchema } from "@/lib/validations/habit";
 
 type Habit = typeof habits.$inferSelect;
 
@@ -41,7 +42,12 @@ export function HabitCard({ habit, streaks }: { habit: Habit; streaks: Streaks }
 
   async function handleSaveEdit(e: React.FormEvent) {
     e.preventDefault();
-    const ok = await patch({ name, targetPerWeek });
+    const parsed = updateHabitSchema.safeParse({ name, targetPerWeek });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? "Check the form and try again.");
+      return;
+    }
+    const ok = await patch(parsed.data);
     if (ok) setIsEditing(false);
   }
 
@@ -91,6 +97,7 @@ export function HabitCard({ habit, streaks }: { habit: Habit; streaks: Streaks }
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
+          maxLength={80}
           className={`font-(family-name:--font-fraunces) text-lg ${INK}
                       bg-transparent border-b border-[#D8D2C2] dark:border-[#333B27]
                       focus:border-[#33502F] dark:focus:border-[#82B27C] outline-none py-1`}
@@ -150,7 +157,7 @@ export function HabitCard({ habit, streaks }: { habit: Habit; streaks: Streaks }
         <div className="flex items-start gap-3.5 min-w-0">
           <span
             className={`mt-0.5 w-9 h-9 shrink-0 rounded-full flex items-center justify-center
-                        ${habit.archived ? "bg-[#EEE8D6] dark:bg-[#24311C] text-[#8B8A72]" : "bg-[#DCE8CB] text-[#33502F] dark:bg-[#2B3A22] dark:text-[#9AC286]"}`}
+                        ${habit.archived ? "bg-[#EEE8D6] dark:bg-[#24311C] text-[#696856]" : "bg-[#DCE8CB] text-[#33502F] dark:bg-[#2B3A22] dark:text-[#9AC286]"}`}
             aria-hidden="true"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -163,7 +170,7 @@ export function HabitCard({ habit, streaks }: { habit: Habit; streaks: Streaks }
             <div className="flex items-baseline gap-2 flex-wrap">
               <h3
                 className={`font-(family-name:--font-fraunces) text-lg truncate ${
-                  habit.archived ? "text-[#8B8A72] line-through" : INK
+                  habit.archived ? "text-[#696856] line-through" : INK
                 }`}
               >
                 {habit.name}

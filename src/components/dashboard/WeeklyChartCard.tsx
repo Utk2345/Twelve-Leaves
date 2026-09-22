@@ -22,7 +22,7 @@ export function WeeklyChartCard({ buckets }: { buckets: DailyBucket[] }) {
             const heightPct = Math.max(Math.round((b.count / max) * 100), b.count > 0 ? 8 : 0);
             return (
               <div key={b.date} className="flex-1 flex flex-col items-center justify-end gap-1 h-full">
-                <span className="text-[11px] text-[#8B8A72] dark:text-[#757058] tabular-nums">
+                <span className="text-[11px] text-[#696856] dark:text-[#757058] tabular-nums">
                   {b.count > 0 ? b.count : ""}
                 </span>
                 <div
@@ -39,7 +39,7 @@ export function WeeklyChartCard({ buckets }: { buckets: DailyBucket[] }) {
         </div>
         <div className="flex gap-2.5 mt-2">
           {buckets.map((b) => (
-            <span key={b.date} className="flex-1 text-center text-[10px] text-[#8B8A72] dark:text-[#757058]">
+            <span key={b.date} className="flex-1 text-center text-[10px] text-[#696856] dark:text-[#757058]">
               {b.label}
             </span>
           ))}
