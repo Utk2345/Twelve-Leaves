@@ -6,3 +6,5 @@ node_modules
 drizzle
 *.tsbuildinfo
 .DS_Store
+.vercel
+
